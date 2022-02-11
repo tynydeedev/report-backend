@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "docker:create": "docker run --name backend-report -p 5432:5432 -e POSTGRES_PASSWORD=backend -d postgres",
-    "docker:run": "docker run backend-report",
+    "docker:run": "docker start backend-report",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

@@ -5,9 +5,9 @@ import { Task } from './tasks.entity';
 
 @EntityRepository(Task)
 export class TasksRepository extends Repository<Task> {
-  async createTask(createTaskDto: CreateTaskDto, user: User) {
-    const newTask = this.create({ ...createTaskDto, user });
+  async createTask(createTaskDto: CreateTaskDto, user: User): Promise<Task> {
+    const result = await this.insert({ ...createTaskDto, user });
 
-    return await this.save(newTask, {});
+    return await this.findOne(result.identifiers[0].id);
   }
 }

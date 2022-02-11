@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/users.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -50,7 +46,7 @@ export class TaskService {
     );
 
     if (!result.affected) {
-      throw new BadRequestException({
+      throw new NotFoundException({
         status: 'error',
         message: 'Invalid task ID',
       });
@@ -63,7 +59,7 @@ export class TaskService {
     const result = await this.tasksRepository.delete({ id, user });
 
     if (!result.affected) {
-      throw new BadRequestException({
+      throw new NotFoundException({
         status: 'error',
         message: 'Invalid task ID',
       });
